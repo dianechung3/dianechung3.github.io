@@ -63,6 +63,7 @@
     font-size: 0.8rem;
     border-bottom: 1px solid #eef0f4;
     overflow: hidden;
+    position: relative;
   }
   .screenshot img {
     width: 100%;
@@ -70,7 +71,65 @@
     object-fit: cover;
     display: block;
   }
-  .screenshot .placeholder-text { padding: 12px; text-align: center; }
+
+  /* ── Carousel ── */
+  .carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #e8eaf0;
+    border-bottom: 1px solid #eef0f4;
+  }
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.35s ease;
+  }
+  .carousel-track img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .carousel-btn:hover { background: rgba(0,0,0,0.7); }
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
+  .carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+  .carousel-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .carousel-dots span.active { background: #fff; }
 
   .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
 
@@ -173,9 +232,21 @@
 
   <!-- ── PI PLANNING ── -->
   <div class="card">
-    <div class="screenshot">
-      <!-- Replace with: <img src="pi-planning.png" alt="PI Planning Tool"> -->
-      <div class="placeholder-text">📸 Screenshot: PI Planning Tool<br><small>drop image here</small></div>
+    <div class="carousel" id="carousel-pi">
+      <div class="carousel-track" id="track-pi">
+        <img src="pi1.png" alt="PI Planning - Team View">
+        <img src="pi2.png" alt="PI Planning - Leadership View">
+        <img src="pi3.png" alt="PI Planning - Admin View">
+        <img src="pi4.png" alt="PI Planning - Overview">
+      </div>
+      <button class="carousel-btn prev" onclick="move('pi', -1)">&#8249;</button>
+      <button class="carousel-btn next" onclick="move('pi',  1)">&#8250;</button>
+      <div class="carousel-dots" id="dots-pi">
+        <span class="active" onclick="goTo('pi',0)"></span>
+        <span onclick="goTo('pi',1)"></span>
+        <span onclick="goTo('pi',2)"></span>
+        <span onclick="goTo('pi',3)"></span>
+      </div>
     </div>
     <div class="card-body">
       <div class="tag-row">
@@ -186,7 +257,7 @@
 
       <div class="problem">
         <strong>The problem</strong>
-        70 scrum teams coordinating quarterly capacity in a shared Google Sheet — conflicting edits,
+        70 scrum teams coordinating quarterly capacity in a shared Google Sheet: conflicting edits,
         no role-based views, no data integrity, and manual pivot tables for leadership rollups.
       </div>
 
@@ -213,19 +284,18 @@
   <!-- ── TSTRAD WEEKLY ── -->
   <div class="card">
     <div class="screenshot">
-      <!-- Replace with: <img src="tstrad-weekly.png" alt="TSTRAD Weekly Dashboard"> -->
-      <div class="placeholder-text">📸 Screenshot: TSTRAD Weekly Dashboard<br><small>drop image here</small></div>
+      <img src="dr.png" alt="DR Capacity Weekly Dashboard">
     </div>
     <div class="card-body">
       <div class="tag-row">
         <span class="tag orange">Initiative Dashboard</span>
-        <span class="tag green">HTML · Python · DRQS/JIRA</span>
+        <span class="tag green">HTML · Python · Tickets/Issues</span>
       </div>
-      <div class="card-title">DR Capacity Initiative — Weekly Tracker</div>
+      <div class="card-title">DR Capacity Initiative: Weekly Tracker</div>
 
       <div class="problem">
         <strong>The problem</strong>
-        A multi-team DR capacity initiative with no single source of truth — owners updating
+        A multi-team DR capacity initiative with no single source of truth: owners updating
         spreadsheets independently, leadership without real-time visibility, and a biweekly
         CTO email built by hand every week.
       </div>
@@ -234,10 +304,10 @@
         <div class="section-label">What I built</div>
         <ul class="bullets">
           <li>Tabbed weekly dashboard with scoreboard, Gantt, risk view, and initiative overview</li>
-          <li>Automated data pipeline: hydrates DRQS and JIRA tickets, computes week-over-week delta</li>
+          <li>Automated data pipeline: hydrates tickets, computes week-over-week delta</li>
           <li>App owner hub with CPU and memory reduction tracking per service</li>
           <li>Deployed to GitHub Pages; refreshed on a Wednesday cron</li>
-          <li>Feeds directly into biweekly CTO briefing — no manual formatting</li>
+          <li>Feeds directly into biweekly CTO briefing with no manual formatting</li>
         </ul>
       </div>
 
@@ -252,8 +322,7 @@
   <!-- ── OPRES ── -->
   <div class="card">
     <div class="screenshot">
-      <!-- Replace with: <img src="opres.png" alt="OpRes Monthly Report"> -->
-      <div class="placeholder-text">📸 Screenshot: OpRes Monthly Report<br><small>drop image here</small></div>
+      <img src="opres.png" alt="OpRes Monthly Report">
     </div>
     <div class="card-body">
       <div class="tag-row">
@@ -264,16 +333,16 @@
 
       <div class="problem">
         <strong>The problem</strong>
-        Monthly operational resilience progress across Buyside teams had no consistent exec-facing
-        view — tracking lived in separate spreadsheets, comparisons to targets were manual,
+        Monthly operational resilience progress across platform teams had no consistent exec-facing
+        view: tracking lived in separate spreadsheets, comparisons to targets were manual,
         and COO-level reporting took hours to assemble.
       </div>
 
       <div>
         <div class="section-label">What I built</div>
         <ul class="bullets">
-          <li>Automated pipeline: three data exports in → exec-ready HTML report out</li>
-          <li>Progress tracking across three workstreams: INIT, Devise, and IAM</li>
+          <li>Automated pipeline: three data exports in, exec-ready HTML report out</li>
+          <li>Progress tracking across three workstreams: onboarding, access, and integrations</li>
           <li>Target banners, collapsible team drill-downs, and priority flagging</li>
           <li>Month-over-month delta computed automatically from snapshots</li>
           <li>COO draft generated in under 60 seconds from raw data</li>
@@ -290,7 +359,36 @@
 
 </main>
 
-<footer>Diane Chung · Technical Program Manager · 2026</footer>
+<footer>Diane Chung · 2026</footer>
+
+<script>
+  const state = {};
+
+  function init(id, total) {
+    state[id] = { current: 0, total };
+  }
+
+  function render(id) {
+    const { current } = state[id];
+    document.getElementById('track-' + id).style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('#dots-' + id + ' span').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function move(id, dir) {
+    const s = state[id];
+    s.current = (s.current + dir + s.total) % s.total;
+    render(id);
+  }
+
+  function goTo(id, i) {
+    state[id].current = i;
+    render(id);
+  }
+
+  init('pi', 4);
+</script>
 
 </body>
 </html>
