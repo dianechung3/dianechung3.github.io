@@ -3,41 +3,71 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diane Chung - Technical Program Manager Portfolio</title>
+<title>Diane Chung — Technical Program Manager Portfolio</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background: #f5f6f8;
-    color: #1a1a2e;
+    background: #faf9f7;
+    color: #1c1917;
     line-height: 1.6;
   }
 
   /* ── Header ── */
   header {
-    background: #1a1a2e;
+    background: #1c1917;
     color: #fff;
-    padding: 56px 40px 48px;
+    padding: 64px 40px 56px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
-  header .title { font-size: 1rem; color: #8892b0; margin-top: 6px; }
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 0%, rgba(109,91,208,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse at 20% 100%, rgba(224,123,84,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  header .title {
+    font-size: 0.9rem;
+    color: #a8a29e;
+    margin-top: 8px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    position: relative;
+  }
+  header .divider {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #6d5bd0, #e07b54);
+    margin: 20px auto;
+    border-radius: 2px;
+  }
   header .tagline {
-    max-width: 560px;
-    margin: 20px auto 0;
+    max-width: 520px;
+    margin: 0 auto;
     font-size: 0.95rem;
-    color: #a8b2d8;
-    line-height: 1.7;
+    color: #d6d3d1;
+    line-height: 1.8;
+    position: relative;
   }
 
   /* ── Grid ── */
   main {
-    max-width: 1080px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 48px 24px 80px;
+    padding: 56px 24px 96px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 28px;
     align-items: start;
   }
@@ -45,23 +75,28 @@
   /* ── Card ── */
   .card {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(28,25,23,0.06), 0 4px 16px rgba(28,25,23,0.06);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 8px rgba(28,25,23,0.08), 0 12px 32px rgba(28,25,23,0.1);
   }
 
+  /* colored top accent strip per card */
+  .card.accent-indigo { border-top: 3px solid #6d5bd0; }
+  .card.accent-amber  { border-top: 3px solid #d97706; }
+  .card.accent-teal   { border-top: 3px solid #0d9488; }
+
+  /* ── Screenshot / Carousel ── */
   .screenshot {
     width: 100%;
     aspect-ratio: 16/10;
-    background: #e8eaf0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #8892b0;
-    font-size: 0.8rem;
-    border-bottom: 1px solid #eef0f4;
+    background: #f0ede9;
     overflow: hidden;
     position: relative;
   }
@@ -72,19 +107,17 @@
     display: block;
   }
 
-  /* ── Carousel ── */
   .carousel {
     position: relative;
     width: 100%;
     aspect-ratio: 16/10;
     overflow: hidden;
-    background: #e8eaf0;
-    border-bottom: 1px solid #eef0f4;
+    background: #f0ede9;
   }
   .carousel-track {
     display: flex;
     height: 100%;
-    transition: transform 0.35s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .carousel-track img {
     flex: 0 0 100%;
@@ -96,78 +129,92 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.45);
-    color: #fff;
+    background: rgba(255,255,255,0.85);
+    color: #1c1917;
     border: none;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.15s, transform 0.15s;
+    backdrop-filter: blur(4px);
   }
-  .carousel-btn:hover { background: rgba(0,0,0,0.7); }
-  .carousel-btn.prev { left: 10px; }
-  .carousel-btn.next { right: 10px; }
+  .carousel-btn:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
+  .carousel-btn.prev { left: 12px; }
+  .carousel-btn.next { right: 12px; }
   .carousel-dots {
     position: absolute;
-    bottom: 8px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 6px;
   }
   .carousel-dots span {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: rgba(255,255,255,0.5);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
   }
-  .carousel-dots span.active { background: #fff; }
+  .carousel-dots span.active {
+    background: #fff;
+    transform: scale(1.3);
+  }
 
-  .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  /* ── Card body ── */
+  .card-body { padding: 24px 26px 28px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
 
   .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
   .tag {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
     text-transform: uppercase;
-    padding: 3px 9px;
+    padding: 3px 10px;
     border-radius: 20px;
-    background: #eef2ff;
-    color: #4a5ccf;
+    border: 1px solid;
+    background: transparent;
   }
-  .tag.green  { background: #e6f7f0; color: #1a7f5a; }
-  .tag.orange { background: #fff4e6; color: #b35c00; }
-  .tag.purple { background: #f3eeff; color: #6b3fa0; }
+  .tag.indigo { border-color: #c4b8f8; color: #5b45c2; background: #f3f0ff; }
+  .tag.amber  { border-color: #fcd87d; color: #92580a; background: #fffbeb; }
+  .tag.teal   { border-color: #99d8d4; color: #0f766e; background: #f0fdfc; }
+  .tag.stone  { border-color: #d6d3d1; color: #57534e; background: #faf9f8; }
 
-  .card-title { font-size: 1.15rem; font-weight: 700; color: #1a1a2e; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: #1c1917; line-height: 1.3; }
 
   .problem {
-    font-size: 0.88rem;
-    color: #555;
-    background: #f8f9fc;
-    border-left: 3px solid #4a5ccf;
-    padding: 10px 12px;
-    border-radius: 0 6px 6px 0;
+    font-size: 0.86rem;
+    color: #57534e;
+    background: #faf9f7;
+    border-left: 2px solid #e0d9f7;
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    line-height: 1.6;
   }
-  .problem strong { display: block; font-size: 0.72rem; text-transform: uppercase;
-    letter-spacing: 0.5px; color: #4a5ccf; margin-bottom: 4px; }
+  .problem strong {
+    display: block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #9d8fdf;
+    margin-bottom: 5px;
+  }
 
   .section-label {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #8892b0;
-    margin-bottom: 4px;
+    color: #a8a29e;
+    margin-bottom: 6px;
   }
 
   ul.bullets {
@@ -175,44 +222,44 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
   }
   ul.bullets li {
-    font-size: 0.87rem;
-    color: #333;
+    font-size: 0.86rem;
+    color: #44403c;
     padding-left: 16px;
     position: relative;
+    line-height: 1.5;
   }
   ul.bullets li::before {
-    content: "→";
+    content: "·";
     position: absolute;
-    left: 0;
-    color: #4a5ccf;
-    font-size: 0.8rem;
+    left: 4px;
+    color: #a8a29e;
+    font-size: 1.1rem;
+    line-height: 1.3;
   }
 
-  .impact-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  .impact-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .impact-stat {
     flex: 1;
-    min-width: 80px;
-    background: #f8f9fc;
-    border-radius: 8px;
-    padding: 10px 12px;
+    min-width: 72px;
+    background: #faf9f7;
+    border: 1px solid #f0ede9;
+    border-radius: 10px;
+    padding: 10px 8px;
     text-align: center;
   }
-  .impact-stat .num { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; }
-  .impact-stat .label { font-size: 0.7rem; color: #777; margin-top: 2px; }
+  .impact-stat .num { font-size: 1.25rem; font-weight: 700; color: #1c1917; }
+  .impact-stat .label { font-size: 0.65rem; color: #a8a29e; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
 
   /* ── Footer ── */
   footer {
     text-align: center;
-    padding: 24px;
+    padding: 32px 24px;
     font-size: 0.8rem;
-    color: #aaa;
+    color: #a8a29e;
+    border-top: 1px solid #f0ede9;
   }
 </style>
 </head>
@@ -221,6 +268,7 @@
 <header>
   <h1>Diane Chung</h1>
   <div class="title">Technical Program Manager</div>
+  <div class="divider"></div>
   <p class="tagline">
     I build tools that replace broken processes: real-time collaboration platforms,
     automated reporting pipelines, and exec-facing dashboards that help teams spend less
@@ -230,8 +278,8 @@
 
 <main>
 
-  <!-- ── PI PLANNING ── -->
-  <div class="card">
+  <!-- PI PLANNING -->
+  <div class="card accent-indigo">
     <div class="carousel" id="carousel-pi">
       <div class="carousel-track" id="track-pi">
         <img src="pi1.png" alt="PI Planning - Team View">
@@ -250,17 +298,15 @@
     </div>
     <div class="card-body">
       <div class="tag-row">
-        <span class="tag">Full-Stack App</span>
-        <span class="tag green">FastAPI · SQLite · WebSockets</span>
+        <span class="tag indigo">Full-Stack App</span>
+        <span class="tag stone">FastAPI · SQLite · WebSockets</span>
       </div>
       <div class="card-title">PI Planning Capacity Tool</div>
-
       <div class="problem">
         <strong>The problem</strong>
         70 scrum teams coordinating quarterly capacity in a shared Google Sheet: conflicting edits,
         no role-based views, no data integrity, and manual pivot tables for leadership rollups.
       </div>
-
       <div>
         <div class="section-label">What I built</div>
         <ul class="bullets">
@@ -272,7 +318,6 @@
           <li>Admin panel for full CRUD: PIs, teams, strategies, goals, epics</li>
         </ul>
       </div>
-
       <div class="impact-row">
         <div class="impact-stat"><div class="num">70+</div><div class="label">scrum teams</div></div>
         <div class="impact-stat"><div class="num">6</div><div class="label">strategies</div></div>
@@ -281,36 +326,33 @@
     </div>
   </div>
 
-  <!-- ── TSTRAD WEEKLY ── -->
-  <div class="card">
+  <!-- DR WEEKLY -->
+  <div class="card accent-amber">
     <div class="screenshot">
       <img src="dr.png" alt="DR Capacity Weekly Dashboard">
     </div>
     <div class="card-body">
       <div class="tag-row">
-        <span class="tag orange">Initiative Dashboard</span>
-        <span class="tag green">HTML · Python · Tickets/Issues</span>
+        <span class="tag amber">Initiative Dashboard</span>
+        <span class="tag stone">HTML · Python · Automated Pipeline</span>
       </div>
       <div class="card-title">DR Capacity Initiative: Weekly Tracker</div>
-
       <div class="problem">
         <strong>The problem</strong>
         A multi-team DR capacity initiative with no single source of truth: owners updating
         spreadsheets independently, leadership without real-time visibility, and a biweekly
         CTO email built by hand every week.
       </div>
-
       <div>
         <div class="section-label">What I built</div>
         <ul class="bullets">
           <li>Tabbed weekly dashboard with scoreboard, Gantt, risk view, and initiative overview</li>
-          <li>Automated data pipeline: hydrates tickets, computes week-over-week delta</li>
+          <li>Automated data pipeline that hydrates tickets and computes week-over-week delta</li>
           <li>App owner hub with CPU and memory reduction tracking per service</li>
-          <li>Deployed to GitHub Pages; refreshed on a Wednesday cron</li>
+          <li>Deployed to GitHub Pages and refreshed on a Wednesday cron</li>
           <li>Feeds directly into biweekly CTO briefing with no manual formatting</li>
         </ul>
       </div>
-
       <div class="impact-row">
         <div class="impact-stat"><div class="num">Weekly</div><div class="label">auto-refresh</div></div>
         <div class="impact-stat"><div class="num">CTO</div><div class="label">audience</div></div>
@@ -319,25 +361,23 @@
     </div>
   </div>
 
-  <!-- ── OPRES ── -->
-  <div class="card">
+  <!-- OPRES -->
+  <div class="card accent-teal">
     <div class="screenshot">
       <img src="opres.png" alt="OpRes Monthly Report">
     </div>
     <div class="card-body">
       <div class="tag-row">
-        <span class="tag purple">Automated Reporting</span>
-        <span class="tag green">Python · HTML · CSV pipeline</span>
+        <span class="tag teal">Automated Reporting</span>
+        <span class="tag stone">Python · HTML · CSV Pipeline</span>
       </div>
       <div class="card-title">Operational Resilience Monthly Report</div>
-
       <div class="problem">
         <strong>The problem</strong>
         Monthly operational resilience progress across platform teams had no consistent exec-facing
         view: tracking lived in separate spreadsheets, comparisons to targets were manual,
         and COO-level reporting took hours to assemble.
       </div>
-
       <div>
         <div class="section-label">What I built</div>
         <ul class="bullets">
@@ -348,7 +388,6 @@
           <li>COO draft generated in under 60 seconds from raw data</li>
         </ul>
       </div>
-
       <div class="impact-row">
         <div class="impact-stat"><div class="num">3</div><div class="label">workstreams</div></div>
         <div class="impact-stat"><div class="num">Monthly</div><div class="label">cadence</div></div>
@@ -359,14 +398,12 @@
 
 </main>
 
-<footer>Diane Chung · 2026</footer>
+<footer>Diane Chung &nbsp;·&nbsp; 2026</footer>
 
 <script>
   const state = {};
 
-  function init(id, total) {
-    state[id] = { current: 0, total };
-  }
+  function init(id, total) { state[id] = { current: 0, total }; }
 
   function render(id) {
     const { current } = state[id];
@@ -382,10 +419,7 @@
     render(id);
   }
 
-  function goTo(id, i) {
-    state[id].current = i;
-    render(id);
-  }
+  function goTo(id, i) { state[id].current = i; render(id); }
 
   init('pi', 4);
 </script>
