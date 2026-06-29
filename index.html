@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diane Chung — PDM Portfolio</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f5f6f8;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 56px 40px 48px;
+    text-align: center;
+  }
+  header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  header .title { font-size: 1rem; color: #8892b0; margin-top: 6px; }
+  header .tagline {
+    max-width: 560px;
+    margin: 20px auto 0;
+    font-size: 0.95rem;
+    color: #a8b2d8;
+    line-height: 1.7;
+  }
+
+  /* ── Grid ── */
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screenshot {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: #e8eaf0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8892b0;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #eef0f4;
+    overflow: hidden;
+  }
+  .screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .screenshot .placeholder-text { padding: 12px; text-align: center; }
+
+  .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #eef2ff;
+    color: #4a5ccf;
+  }
+  .tag.green  { background: #e6f7f0; color: #1a7f5a; }
+  .tag.orange { background: #fff4e6; color: #b35c00; }
+  .tag.purple { background: #f3eeff; color: #6b3fa0; }
+
+  .card-title { font-size: 1.15rem; font-weight: 700; color: #1a1a2e; }
+
+  .problem {
+    font-size: 0.88rem;
+    color: #555;
+    background: #f8f9fc;
+    border-left: 3px solid #4a5ccf;
+    padding: 10px 12px;
+    border-radius: 0 6px 6px 0;
+  }
+  .problem strong { display: block; font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.5px; color: #4a5ccf; margin-bottom: 4px; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8892b0;
+    margin-bottom: 4px;
+  }
+
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  ul.bullets li {
+    font-size: 0.87rem;
+    color: #333;
+    padding-left: 16px;
+    position: relative;
+  }
+  ul.bullets li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #4a5ccf;
+    font-size: 0.8rem;
+  }
+
+  .impact-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .impact-stat {
+    flex: 1;
+    min-width: 80px;
+    background: #f8f9fc;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .impact-stat .num { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; }
+  .impact-stat .label { font-size: 0.7rem; color: #777; margin-top: 2px; }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Diane Chung</h1>
+  <div class="title">Product Delivery Manager, Buy-Side PDMO</div>
+  <p class="tagline">
+    I build tools that replace broken processes — real-time collaboration platforms,
+    automated reporting pipelines, and exec-facing dashboards — so teams spend less time
+    coordinating and more time delivering.
+  </p>
+</header>
+
+<main>
+
+  <!-- ── PI PLANNING ── -->
+  <div class="card">
+    <div class="screenshot">
+      <!-- Replace with: <img src="pi-planning.png" alt="PI Planning Tool"> -->
+      <div class="placeholder-text">📸 Screenshot: PI Planning Tool<br><small>drop image here</small></div>
+    </div>
+    <div class="card-body">
+      <div class="tag-row">
+        <span class="tag">Full-Stack App</span>
+        <span class="tag green">FastAPI · SQLite · WebSockets</span>
+      </div>
+      <div class="card-title">PI Planning Capacity Tool</div>
+
+      <div class="problem">
+        <strong>The problem</strong>
+        70 scrum teams coordinating quarterly capacity in a shared Google Sheet — conflicting edits,
+        no role-based views, no data integrity, and manual pivot tables for leadership rollups.
+      </div>
+
+      <div>
+        <div class="section-label">What I built</div>
+        <ul class="bullets">
+          <li>Real-time collaborative web app with WebSocket sync across concurrent users</li>
+          <li>Role-scoped views: team leads, product leads, PDMs, engineering leadership, and admin</li>
+          <li>Team capacity allocation with overcommitment warnings and sprint tracking</li>
+          <li>Leadership rollups by strategy with live utilization metrics</li>
+          <li>JIRA integration to validate epic keys and pull component data</li>
+          <li>Admin panel for full CRUD: PIs, teams, strategies, goals, epics</li>
+        </ul>
+      </div>
+
+      <div class="impact-row">
+        <div class="impact-stat"><div class="num">70+</div><div class="label">scrum teams</div></div>
+        <div class="impact-stat"><div class="num">6</div><div class="label">strategies</div></div>
+        <div class="impact-stat"><div class="num">100+</div><div class="label">epics tracked</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TSTRAD WEEKLY ── -->
+  <div class="card">
+    <div class="screenshot">
+      <!-- Replace with: <img src="tstrad-weekly.png" alt="TSTRAD Weekly Dashboard"> -->
+      <div class="placeholder-text">📸 Screenshot: TSTRAD Weekly Dashboard<br><small>drop image here</small></div>
+    </div>
+    <div class="card-body">
+      <div class="tag-row">
+        <span class="tag orange">Initiative Dashboard</span>
+        <span class="tag green">HTML · Python · DRQS/JIRA</span>
+      </div>
+      <div class="card-title">DR Capacity Initiative — Weekly Tracker</div>
+
+      <div class="problem">
+        <strong>The problem</strong>
+        A multi-team DR capacity initiative with no single source of truth — owners updating
+        spreadsheets independently, leadership without real-time visibility, and a biweekly
+        CTO email built by hand every week.
+      </div>
+
+      <div>
+        <div class="section-label">What I built</div>
+        <ul class="bullets">
+          <li>Tabbed weekly dashboard with scoreboard, Gantt, risk view, and initiative overview</li>
+          <li>Automated data pipeline: hydrates DRQS and JIRA tickets, computes week-over-week delta</li>
+          <li>App owner hub with CPU and memory reduction tracking per service</li>
+          <li>Deployed to GitHub Pages; refreshed on a Wednesday cron</li>
+          <li>Feeds directly into biweekly CTO briefing — no manual formatting</li>
+        </ul>
+      </div>
+
+      <div class="impact-row">
+        <div class="impact-stat"><div class="num">Weekly</div><div class="label">auto-refresh</div></div>
+        <div class="impact-stat"><div class="num">CTO</div><div class="label">audience</div></div>
+        <div class="impact-stat"><div class="num">0</div><div class="label">manual updates</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── OPRES ── -->
+  <div class="card">
+    <div class="screenshot">
+      <!-- Replace with: <img src="opres.png" alt="OpRes Monthly Report"> -->
+      <div class="placeholder-text">📸 Screenshot: OpRes Monthly Report<br><small>drop image here</small></div>
+    </div>
+    <div class="card-body">
+      <div class="tag-row">
+        <span class="tag purple">Automated Reporting</span>
+        <span class="tag green">Python · HTML · CSV pipeline</span>
+      </div>
+      <div class="card-title">Operational Resilience Monthly Report</div>
+
+      <div class="problem">
+        <strong>The problem</strong>
+        Monthly operational resilience progress across Buyside teams had no consistent exec-facing
+        view — tracking lived in separate spreadsheets, comparisons to targets were manual,
+        and COO-level reporting took hours to assemble.
+      </div>
+
+      <div>
+        <div class="section-label">What I built</div>
+        <ul class="bullets">
+          <li>Automated pipeline: three data exports in → exec-ready HTML report out</li>
+          <li>Progress tracking across three workstreams: INIT, Devise, and IAM</li>
+          <li>Target banners, collapsible team drill-downs, and priority flagging</li>
+          <li>Month-over-month delta computed automatically from snapshots</li>
+          <li>COO draft generated in under 60 seconds from raw data</li>
+        </ul>
+      </div>
+
+      <div class="impact-row">
+        <div class="impact-stat"><div class="num">3</div><div class="label">workstreams</div></div>
+        <div class="impact-stat"><div class="num">Monthly</div><div class="label">cadence</div></div>
+        <div class="impact-stat"><div class="num">COO</div><div class="label">audience</div></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Diane Chung · Buy-Side PDMO · 2026</footer>
+
+</body>
+</html>
